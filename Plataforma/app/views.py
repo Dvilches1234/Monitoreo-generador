@@ -21,9 +21,11 @@ def post():
     v = request.form['v']
     fecha = datetime.now()
     sql = """
-    insert into meditions (intensidad, velViento, fecha) values ('(%s)','(%s)', ('%s'));
+    insert into meditions (intensidad, velViento, fecha) values ((%s), (%s), ('%s'));
     """%(i,v,fecha)
     print "Saving the next values: ",i,v,fecha
+    cur.execute(sql)
+    conn.commit()
     return "200" #return ok
 
 @app.route('/charts')
