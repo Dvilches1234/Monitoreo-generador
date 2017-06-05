@@ -11,7 +11,7 @@ cur = conn.cursor()
 @app.route('/')
 @app.route('/index')
 def index():
-    print "Showing index..."
+    print ("Showing index...")
     return render_template("index.html")
 
 # recibe post desde el lado del cliente
@@ -23,18 +23,18 @@ def post():
     sql = """
     insert into meditions (intensidad, velViento, fecha) values ((%s), (%s), ('%s'));
     """%(i,v,fecha)
-    print "Saving the next values: ",i,v,fecha
+    print ("Saving the next values: ",i,v,fecha)
     cur.execute(sql)
     conn.commit()
     return "200" #return ok
 
 @app.route('/charts')
 def charts():
-    print "Showing charts..."
+    print ("Showing charts...")
     sql="""
     select intensidad, velViento from Meditions;
     """
     cur.execute(sql)
     datos=cur.fetchall()
-    print datos
+    print (datos)
     return render_template("charts.html", datos = datos)
