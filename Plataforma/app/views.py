@@ -35,6 +35,12 @@ def charts():
     select intensidad, velViento from Meditions;
     """
     cur.execute(sql)
-    datos=cur.fetchall()
-    print datos
-    return render_template("charts.html", datos = datos)
+    row = cur.fetchall()
+    row.sort()
+    intensidad = []
+    velViento = []
+    for item in row:
+        intensidad.append(item[0])
+        velViento.append(item[1])
+
+    return render_template("charts.html", intensidad = intensidad, velViento = velViento)
