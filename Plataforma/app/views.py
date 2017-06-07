@@ -2,9 +2,9 @@ from app import app
 from datetime import datetime
 from flask import render_template
 from flask import request
-from config import *
-
+from app.config import *
 import psycopg2
+
 conn = psycopg2.connect("dbname=%s user=%s password=%s"%(database,user,password))
 cur = conn.cursor()
 
