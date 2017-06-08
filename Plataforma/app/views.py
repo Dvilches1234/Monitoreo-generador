@@ -32,15 +32,19 @@ def post():
 def charts():
     print "Showing charts..."
     sql="""
-    select intensidad, velViento from Meditions;
+    select intensidad, velViento, fecha from Meditions;
     """
     cur.execute(sql)
     row = cur.fetchall()
     row.sort()
     intensidad = []
     velViento = []
+    fecha = []
     for item in row:
         intensidad.append(item[0])
         velViento.append(item[1])
+        # t=[]
+        a=str(item[2].hour)+":"+str(item[2].minute)+":"+str(item[2].second)
+        fecha.append(a)
 
-    return render_template("charts.html", intensidad = intensidad, velViento = velViento)
+    return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha)
