@@ -12,7 +12,7 @@ float res = 1340 ;
 //variables wind speed
 float begin_time = 0;
 
-float wind_speed = 35;
+float wind_speed = 5;
 int inpin = 2;
 //
 

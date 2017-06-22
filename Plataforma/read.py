@@ -7,7 +7,7 @@ import psycopg2
 conn = psycopg2.connect("dbname=%s user=%s password=%s"%(database,user,password))
 cur = conn.cursor()
 
-ser = serial.Serial('/dev/ttyACM1', 9600)
+ser = serial.Serial('/dev/ttyACM0', 9600)
 while True:
     time.sleep(3)
     date = datetime.now()
