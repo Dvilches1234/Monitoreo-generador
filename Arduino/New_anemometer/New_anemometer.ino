@@ -38,6 +38,6 @@ void loop ()
 void calculate_speed(){
    int delta = medition_time /1000;
    float angular = revs * pi /delta;
-   wind_speed = angular * r;
+   wind_speed = angular * r * 3.6;
    revs = 0;
 }
