@@ -48,3 +48,8 @@ def charts():
         fecha.append(a)
 
     return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha)
+
+@app.route('/measure')
+def measuring():
+    print("esta measurando")
+    return render_template("measure.html")

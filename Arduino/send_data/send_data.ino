@@ -31,7 +31,7 @@ void setup(){
 }
 
 void loop(){
-  int time = millis(); 
+  
   if (digitalRead(inpin) == HIGH){
    if (last_state == false)
      revs++;
@@ -39,6 +39,8 @@ void loop(){
    }else{
     last_state = false;
    }
+   
+   int time = millis(); 
    if (time >= next_medition){
      int analog_value = analogRead(A1);
      input_voltage = (analog_value * 5.0) / 1024.0; 
@@ -56,12 +58,12 @@ void loop(){
      Serial.print("v ");
      Serial.println(wind_speed);
      next_medition += medition_time;
-   }else{
+   }/*else{
      Serial.print("i ");
      Serial.println(-1);
      Serial.print("v ");
      Serial.println(-1);
-   }
+   }*/
   
 }
 

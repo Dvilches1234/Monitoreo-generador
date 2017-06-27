@@ -7,9 +7,12 @@ cur = conn.cursor()
 
 fecha = datetime.now()
 sql = """
-insert into meditions (intensidad, velViento, fecha) values ('0.3','20.5', ('%s'))
+insert into meditions (id, intensidad, velViento, fecha, lugar) values ('1','0.3','20.5',('%s'),'1')
 returning
-intensidad, velViento, fecha;
+id, intensidad, velViento, fecha, lugar;
+insert into Lugares(id, lugar) values ('1', 'Home')
+returning
+id, lugar
 """%(fecha)
 
 cur.execute(sql)

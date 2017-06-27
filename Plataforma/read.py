@@ -31,15 +31,17 @@ while True:
         print("l2",line2, len(line2))
 
         if len(line1) == 2 and len(line2) == 2:
-            if line2[1] != "-1\r\n" and line1[1] != "-1\r\n":
-                if line2[0] == "i" :
-                    intensity = float(line2[1])
-                if line1[0] == "v":
-                    speed = float(line1[1])
-                if line1[0] == "i" :
-                    intensity = float(line1[1])
-                if line2[0] == "v":
-                    speed = float(line2[1])
+                try:
+                    if line2[0] == "i" :
+                        intensity = float(line2[1])
+                    if line1[0] == "v":
+                        speed = float(line1[1])
+                    if line1[0] == "i" :
+                        intensity = float(line1[1])
+                    if line2[0] == "v":
+                        speed = float(line2[1])
+                except ValueError:
+                    pass
 
     except serial.SerialException:
         pass
