@@ -7,8 +7,10 @@ sql ="""select 'drop table "' || tablename || '" cascade;' from pg_tables;""" #
 cur.execute(sql)
 
 sql = """
-CREATE TABLE Meditions(id serial PRIMARY KEY, intensidad decimal, velViento decimal, Fecha timestamp);
+CREATE TABLE Meditions(id serial PRIMARY KEY, intensidad decimal, velViento decimal, fecha timestamp, lugar integer);
+CREATE TABLE Lugar(id serial PRIMARY KEY, Lugar varchar);
 """
+
 #queda con 255 el varchar
 cur.execute(sql)
 conn.commit()
