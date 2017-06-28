@@ -1,4 +1,4 @@
-int in_pin = 2;
+int in_pin = 3;
 int revs = 0;
 int medition_time = 2000;
 int next_medition;
@@ -12,6 +12,7 @@ void setup()
   Serial.begin(9600);
   pinMode(in_pin, INPUT);
   digitalWrite(in_pin, LOW);
+  attachInterrupt(in_pin, show(), RISING);
   next_medition = millis() + medition_time;
   
 }  
@@ -22,6 +23,8 @@ void loop ()
   if (digitalRead(in_pin) == HIGH){
     if (last_state == false)
       revs++;
+      Serial.println(revs);
+      Serial.println("--------HIGH");
     last_state = true; 
   }else{
     last_state = false;
@@ -40,4 +43,7 @@ void calculate_speed(){
    float angular = revs * pi /delta;
    wind_speed = angular * r * 3.6;
    revs = 0;
+}
+void show(){
+Serial.println("HIGH");
 }

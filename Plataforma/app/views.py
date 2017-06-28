@@ -4,7 +4,8 @@ from flask import render_template
 from flask import request
 from app.config import *
 import psycopg2
-
+import time
+import serial
 conn = psycopg2.connect("dbname=%s user=%s password=%s"%(database,user,password))
 cur = conn.cursor()
 
@@ -53,3 +54,4 @@ def charts():
 def measuring():
     print("esta measurando")
     return render_template("measure.html")
+    
