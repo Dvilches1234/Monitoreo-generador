@@ -4,7 +4,8 @@ from flask import render_template
 from flask import request
 from app.config import *
 import psycopg2
-
+import time
+import serial
 conn = psycopg2.connect("dbname=%s user=%s password=%s"%(database,user,password))
 cur = conn.cursor()
 
@@ -72,4 +73,9 @@ def charts():
         a=str(item[2].hour)+":"+str(item[2].minute)+":"+str(item[2].second) #TODO: deberia poner fecha
         fecha.append(a)
 
-    return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha, lugar = lugar)
+    return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha, lugar=lugar)
+
+@app.route('/measure')
+def measuring():
+    print("esta measurando")
+    return render_template("measure.html")

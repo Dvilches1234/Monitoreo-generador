@@ -13,13 +13,14 @@ void loop()
    input_voltage = (analog_value * 5.0) / 1024.0; 
 
    
-   if (input_voltage < 0.02) 
+  /* if (input_voltage < 0.02) 
    {
      input_voltage=0.0;
    }
+   */
   intensity = input_voltage * 100000/ res;
     Serial.print("I= ");
-    Serial.println(intensity);
+    Serial.println(intensity,4);
     delay(1000);
 }
 
