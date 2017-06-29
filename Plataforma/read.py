@@ -49,8 +49,9 @@ while True:
     print("intensity", intensity)
     print("speed", speed)
 
-    #sql = """
-    #insert into meditions (intensidad, velViento, fecha) values ((%s), (%s), ('%s'));
-    #"""%(intensity, speed, date)
-    #cur.execute(sql)
-    #   conn.commit()
+    if intensity > 0 and speed > 0:
+        sql = """
+        insert into meditions (intensidad, velViento, fecha, lugar) values ((%s), (%s), ('%s'), 4);
+        """%(intensity, speed, date)
+        cur.execute(sql)
+        conn.commit()

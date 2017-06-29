@@ -16,31 +16,31 @@ def index():
     return render_template("index.html")
 
 # recibe post desde el lado del cliente
-@app.route('/data', methods=['POST'])
-def post():
-    i = request.form['i']
-    v = request.form['v']
-    l = request.form['l']
-    fecha = datetime.now()
-
-    sql = """
-    SELECT id FROM lugar where lugar = ('%s');
-    """%(l)
-    cur.execute(sql)
-    lugar_id = cur.fetchone()
-    if not lugar_id:
-        print "ERROR THAT PLACE DOESN'T EXIST"
-        # return "404"
-
-    lugar_id = lugar_id[0]
-
-    sql = """
-    insert into meditions (intensidad, velViento, fecha, lugar) values ((%s), (%s), ('%s'), (%s));
-    """%(i,v,fecha,lugar_id)
-    print ("Saving the next values: ",i,v,fecha,lugar_id)
-    cur.execute(sql)
-    conn.commit()
-    return "200" #return ok
+# @app.route('/data', methods=['POST'])
+# def post():
+#     i = request.form['i']
+#     v = request.form['v']
+#     l = request.form['l']
+#     fecha = datetime.now()
+#
+#     sql = """
+#     SELECT id FROM lugar where lugar = ('%s');
+#     """%(l)
+#     cur.execute(sql)
+#     lugar_id = cur.fetchone()
+#     if not lugar_id:
+#         print "ERROR THAT PLACE DOESN'T EXIST"
+#         # return "404"
+#
+#     lugar_id = lugar_id[0]
+#
+#     sql = """
+#     insert into meditions (intensidad, velViento, fecha, lugar) values ((%s), (%s), ('%s'), (%s));
+#     """%(i,v,fecha,lugar_id)
+#     print ("Saving the next values: ",i,v,fecha,lugar_id)
+#     cur.execute(sql)
+#     conn.commit()
+#     return "200" #return ok
 
 @app.route('/charts', methods=['GET'])
 def charts():
