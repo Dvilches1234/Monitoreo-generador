@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <script src='static/js/Chart.min.js'></script>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -12,17 +13,36 @@
                 <i class="fa fa-dashboard"></i>  <a href="/index">Index</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> Gráficos
+                <i class="fa fa-file"></i> Gráficos de {{lugar}}
             </li>
         </ol>
     </div>
-
+    <div class="container">
+      <h4>Filtros:</h4>
+      <a href="/charts?lugar=1" class="btn btn-primary" role="button">Lugar 1</a>
+      <a href="/charts?lugar=2" class="btn btn-primary" role="button">Lugar 2</a>
+      <a href="/charts?lugar=3" class="btn btn-primary" role="button">Lugar 3</a>
+      <!-- <form role="form" action="/charts" method="get">
+        <label class="checkbox-inline">
+          <input type="checkbox" class="form-check-input" name = "lugar" value="1">Lugar 1
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" class="form-check-input" name = "lugar" value="2">Lugar 2
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" class="form-check-input" name = "lugar" value="3">Lugar 3
+      </label><br><br>
+        <button type="submit" class="btn btn-primary"> Filtrar</button>
+      </form> -->
+      <br><br>
+    </div>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>
-                        Intensidad generada con respecto a la velocidad del viento (Ampere x10^-6 y metros/seg respectivamente)</h3>
+                        Intensidad generada con respecto a la velocidad del viento
+                    </h3>
                 </div>
                 <canvas id="chart" width="600" height="400"></canvas>
                 <div class="panel-body">
@@ -32,11 +52,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>
-                        Intensidad generada por fecha</h3>
+                        Intensidad generada por hora</h3>
                 </div>
                 <canvas id="chart2" width="600" height="400"></canvas>
                 <div class="panel-body">
@@ -46,11 +66,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>
-                        Velocidad del viento por fecha</h3>
+                        Velocidad del viento por hora</h3>
                 </div>
                 <canvas id="chart3" width="600" height="400"></canvas>
                 <div class="panel-body">
@@ -83,6 +103,7 @@
    }
 
    var barData2 = {
+
    labels : [{% for item in fecha %}
                   "{{item}}",
               {% endfor %}],

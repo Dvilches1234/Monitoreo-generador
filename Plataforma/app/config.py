@@ -1,5 +1,5 @@
 host = "localhost"
-port = 5000
-user = "proyecto"
-password = "tics"
-database = "generator"
+port = 4243
+user = "tics"
+password = "1234"
+database = "tics"

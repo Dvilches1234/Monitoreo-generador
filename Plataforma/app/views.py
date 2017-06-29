@@ -19,32 +19,57 @@ def index():
 def post():
     i = request.form['i']
     v = request.form['v']
+    l = request.form['l']
     fecha = datetime.now()
+
     sql = """
-    insert into meditions (intensidad, velViento, fecha) values ((%s), (%s), ('%s'));
-    """%(i,v,fecha)
-    print ("Saving the next values: ",i,v,fecha)
+    SELECT id FROM lugar where lugar = ('%s');
+    """%(l)
+    cur.execute(sql)
+    lugar_id = cur.fetchone()
+    if not lugar_id:
+        print "ERROR THAT PLACE DOESN'T EXIST"
+        # return "404"
+
+    lugar_id = lugar_id[0]
+
+    sql = """
+    insert into meditions (intensidad, velViento, fecha, lugar) values ((%s), (%s), ('%s'), (%s));
+    """%(i,v,fecha,lugar_id)
+    print ("Saving the next values: ",i,v,fecha,lugar_id)
     cur.execute(sql)
     conn.commit()
     return "200" #return ok
 
-@app.route('/charts')
+@app.route('/charts', methods=['GET'])
 def charts():
+    lugar = request.args.getlist('lugar')
     print ("Showing charts...")
-    sql="""
-    select intensidad, velViento, fecha from Meditions;
-    """
+    if lugar:
+        sql="""
+        select intensidad, velViento, fecha, lugar.lugar from Meditions, lugar where meditions.lugar='%s'
+        and lugar.id=meditions.lugar;
+        """%(lugar[0])
+    else:
+        sql="""
+        select intensidad, velViento, fecha from Meditions;
+        """
+
     cur.execute(sql)
     row = cur.fetchall()
     row.sort()
     intensidad = []
     velViento = []
     fecha = []
+    if len(row) == 4:
+        lugar = row[3]
+    else:
+        lugar = ""
+
     for item in row:
         intensidad.append(item[0])
         velViento.append(item[1])
-        # t=[]
-        a=str(item[2].hour)+":"+str(item[2].minute)+":"+str(item[2].second)
+        a=str(item[2].hour)+":"+str(item[2].minute)+":"+str(item[2].second) #TODO: deberia poner fecha
         fecha.append(a)
 
-    return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha)
+    return render_template("charts.html", intensidad = intensidad, velViento = velViento, fecha = fecha, lugar = lugar)
